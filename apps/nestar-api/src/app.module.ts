@@ -10,15 +10,16 @@ import { DatabaseModule } from './database/database.module';
 
 @Module({
 	imports: [
-		ConfigModule.forRoot(),
+		ConfigModule.forRoot(), // .env di oqishini aytyabmiz
 		GraphQLModule.forRoot({
+			// GraphQL modulimizdi chaqirib olyabmiz va configuratsiyalarini ham yozib olyabmiz
 			driver: ApolloDriver,
 			playground: true,
 			uploads: false,
 			autoSchemaFile: true,
 		}),
-		ComponentsModule,
-		DatabaseModule,
+		ComponentsModule, // backendemizning asosiy mantigini shu yerda yozganmiz, bu standard, componentlarni yigib beradi
+		DatabaseModule, // buni chqarishdan maqsad bu mongodb ga successfull connect qilish uchun
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver],
