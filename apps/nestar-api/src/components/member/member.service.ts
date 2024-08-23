@@ -37,7 +37,6 @@ export class MemberService {
 		}
 
 		// TODO: compare passwords
-		console.log('response', response);
 
 		const isMatch = memberPassword === response.memberPassword;
 		if (!isMatch) {
