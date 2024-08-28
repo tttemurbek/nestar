@@ -29,7 +29,7 @@ import { T } from './libs/types/common';
 				return graphQLFormattedError;
 			},
 		}),
-		ComponentsModule, // backendemizning asosiy mantigini shu yerda yozganmiz, bu standard, componentlarni yigib beradi
+		ComponentsModule, // backendemizning asosiy mantigini shu yerda yozganmiz, bu standard, componentlarni yigib beradi, ko'prik misolida
 		DatabaseModule, // buni chqarishdan maqsad bu mongodb ga successfull connect qilish uchun
 	],
 	controllers: [AppController],
