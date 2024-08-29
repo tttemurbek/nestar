@@ -77,6 +77,7 @@ export class MemberService {
 		if (memberId) {
 			// record view
 			const viewInput: ViewInput = { memberId: memberId, viewRefId: targetId, viewGroup: ViewGroup.MEMBER };
+
 			const newView = await this.viewService.recordView(viewInput);
 			if (newView) {
 				// memberView increase
