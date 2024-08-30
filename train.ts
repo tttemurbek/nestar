@@ -1,32 +1,30 @@
 /**
- ZO-TASK:
+ ZP-TASK:
 
-Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
-MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return true 
+shunday function yozing, u 2 ta array parametr qabul qilsin. Siz bu ikki arrayning qiymatlari o'xshash bo'lishini (ya'ni, ularning barcha elementlari bir xil bo'lishini) tekshirishingiz kerak.
+
+MASALAN: 
+areArraysEqual([1, 2, 3], [3, 1, 2]) // true
+areArraysEqual([1, 2, 3], [3, 1, 2, 1]) // true
+areArraysEqual([1, 2, 3], [4, 1, 2]) // false 
  
  */
+function areArraysEqual(arr1: number[], arr2: number[]): boolean {
+	const frequencyMap = (arr) => {
+		const map = new Map();
+		arr.forEach((num) => map.set(num, (map.get(num) || 0) + 1));
+		return map;
+	};
 
-import { emitWarning } from 'process';
+	const map1 = frequencyMap(arr1);
+	const map2 = frequencyMap(arr2);
 
-function areParenthesesBalanced(smth: string) {
-	let count1 = 0;
-	let count2 = 0;
-
-	for (let i = 0; i < smth.length; i++) {
-		if (smth[i] === '(') {
-			count1++;
+	for (let [key, value] of map1) {
+		if ((map2.get(key) || 0) < value) {
+			return false;
 		}
 	}
-
-	for (let i = 0; i < smth.length; i++) {
-		if (smth[i] === ')') {
-			count2++;
-		}
-	}
-
-	if (count1 === count2) {
-		return true;
-	} else return false;
+	return true;
 }
 
-console.log(areParenthesesBalanced('string()ichida(qavslar)soni()balansda'));
+console.log(areArraysEqual([1, 2, 3], [3, 2, 4, 3, 2, 1]));
