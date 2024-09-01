@@ -195,7 +195,7 @@ export class AgentPropertiesInquiry {
 	direction?: Direction;
 
 	@IsNotEmpty()
-	@Field(() => PISearch)
+	@Field(() => APISearch)
 	search: APISearch;
 }
 
@@ -232,6 +232,6 @@ export class AllPropertiesInquiry {
 	direction?: Direction;
 
 	@IsNotEmpty()
-	@Field(() => PISearch)
+	@Field(() => ALPISearch)
 	search: ALPISearch;
 }
