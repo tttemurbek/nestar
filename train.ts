@@ -1,30 +1,32 @@
 /**
- ZP-TASK:
+ ZQ-TASK:
 
-shunday function yozing, u 2 ta array parametr qabul qilsin. Siz bu ikki arrayning qiymatlari o'xshash bo'lishini (ya'ni, ularning barcha elementlari bir xil bo'lishini) tekshirishingiz kerak.
+Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin.
+MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4] 
 
-MASALAN: 
-areArraysEqual([1, 2, 3], [3, 1, 2]) // true
-areArraysEqual([1, 2, 3], [3, 1, 2, 1]) // true
-areArraysEqual([1, 2, 3], [4, 1, 2]) // false 
- 
  */
-function areArraysEqual(arr1: number[], arr2: number[]): boolean {
-	const frequencyMap = (arr) => {
-		const map = new Map();
-		arr.forEach((num) => map.set(num, (map.get(num) || 0) + 1));
-		return map;
-	};
 
-	const map1 = frequencyMap(arr1);
-	const map2 = frequencyMap(arr2);
+import { find } from 'rxjs';
 
-	for (let [key, value] of map1) {
-		if ((map2.get(key) || 0) < value) {
-			return false;
+function findDuplicates(arr: number[]): number[] {
+	const newArr: { [key: number]: number } = {};
+	const duplicates: number[] = [];
+
+	for (const num of arr) {
+		if (newArr[num]) {
+			newArr[num]++;
+		} else {
+			newArr[num] = 1;
 		}
 	}
-	return true;
+
+	for (const num in newArr) {
+		if (newArr[num] > 1) {
+			duplicates.push(Number(num));
+		}
+	}
+
+	return duplicates;
 }
 
-console.log(areArraysEqual([1, 2, 3], [3, 2, 4, 3, 2, 1]));
+console.log(findDuplicates([1, 2, 3, 4, 5, 6, 67, 7, 5]));
