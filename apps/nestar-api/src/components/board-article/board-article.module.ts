@@ -6,15 +6,18 @@ import BoardArticleSchema from '../../schemas/BoardArticle.model';
 import { AuthModule } from '../auth/auth.module';
 import { MemberModule } from '../member/member.module';
 import { ViewModule } from '../view/view.module';
+import { MemberService } from '../member/member.service';
+import BoardArticleModel from '../../schemas/BoardArticle.model';
+import { ViewService } from '../view/view.service';
 
 @Module({
 	imports: [
-		MongooseModule.forFeature([{ name: 'BoardArticle ', schema: BoardArticleSchema }]),
+		MongooseModule.forFeature([{ name: 'BoardArticle', schema: BoardArticleSchema }]),
 		AuthModule,
 		MemberModule,
 		ViewModule,
 	],
 	providers: [BoardArticleResolver, BoardArticleService],
-	exports: [BoardArticleService],
+	exports: [BoardArticleResolver, BoardArticleService],
 })
 export class BoardArticleModule {}
