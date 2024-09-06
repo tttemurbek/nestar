@@ -7,6 +7,7 @@ import { AuthModule } from '../auth/auth.module';
 import { MemberModule } from '../member/member.module';
 import { PropertyModule } from '../property/property.module';
 import { BoardArticleModule } from '../board-article/board-article.module';
+import { PropertyService } from '../property/property.service';
 
 @Module({
 	imports: [
@@ -22,5 +23,6 @@ import { BoardArticleModule } from '../board-article/board-article.module';
 		BoardArticleModule,
 	],
 	providers: [CommentResolver, CommentService],
+	exports: [CommentService],
 })
 export class CommentModule {}

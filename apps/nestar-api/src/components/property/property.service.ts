@@ -165,7 +165,7 @@ export class PropertyService {
 
 		const result = await this.propertyModel
 			.aggregate([
-				{ $match: match },
+				{ $match: match }, 
 				{ $sort: sort },
 				{
 					$facet: {
