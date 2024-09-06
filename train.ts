@@ -1,32 +1,32 @@
 /**
- ZQ-TASK:
+ZR-TASK:
 
-Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin.
-MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4] 
-
+Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
+MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6}
  */
 
-import { find } from 'rxjs';
+function countNumberAndLetters(smth: string): any {
+	let countNum = 0;
+	let countStr = 0;
+	let result = {
+		number: countNum,
+		letter: countStr,
+	};
 
-function findDuplicates(arr: number[]): number[] {
-	const newArr: { [key: number]: number } = {};
-	const duplicates: number[] = [];
+	for (let i = 0; i < smth.length; i++) {
+		if (!isNaN(Number(smth[i])) && smth[i] !== ' ') {
+			countNum++;
+		}
 
-	for (const num of arr) {
-		if (newArr[num]) {
-			newArr[num]++;
-		} else {
-			newArr[num] = 1;
+		if (/[a-zA-Z]/.test(smth[i])) {
+			countStr++;
 		}
 	}
 
-	for (const num in newArr) {
-		if (newArr[num] > 1) {
-			duplicates.push(Number(num));
-		}
-	}
+	result.number = countNum;
+	result.letter = countStr;
 
-	return duplicates;
+	return result;
 }
 
-console.log(findDuplicates([1, 2, 3, 4, 5, 6, 67, 7, 5]));
+console.log(countNumberAndLetters('string152%¥'));
