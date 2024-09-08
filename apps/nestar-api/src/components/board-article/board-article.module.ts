@@ -9,6 +9,7 @@ import { ViewModule } from '../view/view.module';
 import { MemberService } from '../member/member.service';
 import BoardArticleModel from '../../schemas/BoardArticle.model';
 import { ViewService } from '../view/view.service';
+import { LikeModule } from '../like/like.module';
 
 @Module({
 	imports: [
@@ -16,6 +17,7 @@ import { ViewService } from '../view/view.service';
 		AuthModule,
 		MemberModule,
 		ViewModule,
+		LikeModule,
 	],
 	providers: [BoardArticleResolver, BoardArticleService],
 	exports: [BoardArticleResolver, BoardArticleService],
