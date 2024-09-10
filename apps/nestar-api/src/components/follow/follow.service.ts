@@ -5,7 +5,7 @@ import { Follower, Followers, Following, Followings } from '../../libs/dto/follo
 import { MemberService } from '../member/member.service';
 import { FollowInquiry } from '../../libs/dto/follow/follow.input';
 import { Direction, Message } from '../../libs/enums/common.enum';
-import { lookupFollowingData } from '../../libs/config';
+import { lookupFollowerData, lookupFollowingData } from '../../libs/config';
 import { T } from '../../libs/types/common';
 
 @Injectable()
@@ -56,13 +56,10 @@ export class FollowService {
 		return result;
 	}
 
-	
-	
-	
 	public async getMemberFollowings(memberId: ObjectId, input: FollowInquiry): Promise<Followings> {
 		const { page, limit, search } = input;
 		if (!search.followerId) throw new InternalServerErrorException(Message.BAD_REQUEST);
-		const match: T = { followerdId: search?.followerId };
+		const match: T = { followerId: search?.followerId };
 		console.log('match', match);
 
 		const result = await this.followModel
@@ -91,5 +88,34 @@ export class FollowService {
 		return result[0];
 	}
 
-	// public async getMemberFollowers(memberId: ObjectId, input: FollowInquiry): Promise<Followers> {}
+	public async getMemberFollowers(memberId: ObjectId, input: FollowInquiry): Promise<Followers> {
+		const { page, limit, search } = input;
+		if (!search.followingId) throw new InternalServerErrorException(Message.BAD_REQUEST);
+
+		const match: T = { followingId: search?.followingId };
+		console.log('match', match);
+
+		const result = await this.followModel
+			.aggregate([
+				{ $match: match },
+				{ $sort: { createdAt: Direction.DESC } },
+				{
+					$facet: {
+						list: [
+							{ $skip: (page - 1) * limit },
+							{ $limit: limit },
+							//meLiked
+							//meFollowed
+							lookupFollowerData,
+							{ $unwind: '$followerData' },
+						],
+						metaCounter: [{ $count: 'total' }],
+					},
+				},
+			])
+			.exec();
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+
+		return result[0];
+	}
 }

@@ -41,7 +41,15 @@ export class FollowResolver {
 		return await this.followService.getMemberFollowings(memberId, input);
 	}
 
-	// @UseGuards(WithoutGuard)
-	// @Query(() => Followers)
-	// public async getMemberFollowers(): Promise<Followers> {}
+	@UseGuards(WithoutGuard)
+	@Query(() => Followers)
+	public async getMemberFollowers(
+		@Args('input') input: FollowInquiry,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<Followers> {
+		console.log('Query: getMemberFollowers');
+		const { followingId } = input.search;
+		input.search.followingId = shapeIntoMongoObjectId(followingId);
+		return await this.followService.getMemberFollowers(memberId, input);
+	}
 }
