@@ -8,6 +8,7 @@ import { AppResolver } from './app.resolver';
 import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
 import { T } from './libs/types/common';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
 	imports: [
@@ -30,7 +31,7 @@ import { T } from './libs/types/common';
 			},
 		}),
 		ComponentsModule, // backendemizning asosiy mantigini shu yerda yozganmiz, bu standard, componentlarni yigib beradi, ko'prik misolida
-		DatabaseModule, // buni chqarishdan maqsad bu mongodb ga successfull connect qilish uchun
+		DatabaseModule, SocketModule, // buni chqarishdan maqsad bu mongodb ga successfull connect qilish uchun
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver],
