@@ -127,3 +127,12 @@ export const lookupFollowerData = {
 		as: 'followerData',
 	},
 };
+
+export const lookupFavorite = {
+	$lookup: {
+		from: 'members',
+		localField: 'favouriteProperty.memberId',
+		foreignField: '_id',
+		as: 'favouriteProperty.memberData',
+	},
+};
