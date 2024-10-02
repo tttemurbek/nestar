@@ -62,7 +62,7 @@ export class AgentsInquiry {
 	limit: number;
 
 	@IsOptional()
-	@IsIn([availableAgentSorts])
+	@IsIn(availableAgentSorts)
 	// tek usi arraydagi magliwmatlardi qabil qiladi degendi bildiredi
 	@Field(() => String, { nullable: true })
 	sort?: string;
