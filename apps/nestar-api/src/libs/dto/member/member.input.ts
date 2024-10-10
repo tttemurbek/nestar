@@ -104,8 +104,7 @@ export class MembersInquiry {
 	limit: number;
 
 	@IsOptional()
-	@IsIn([availableMemberSorts])
-	// tek usi arraydagi magliwmatlardi qabil qiladi degendi bildiredi
+	@IsIn(availableMemberSorts)
 	@Field(() => String, { nullable: true })
 	sort?: string;
 
